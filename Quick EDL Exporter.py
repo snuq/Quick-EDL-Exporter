@@ -105,7 +105,7 @@ def fades(sequence, direction):
 
 def get_sample_rate():
     #Returns a string of the current sample rate in Blender's settings
-    rate_text = bpy.context.user_preferences.system.audio_sample_rate
+    rate_text = bpy.context.preferences.system.audio_sample_rate
     if rate_text == 'RATE_48000':
         return '48000'
     elif rate_text == 'RATE_96000':
@@ -371,20 +371,20 @@ class VegasEDLExport(bpy.types.Operator, ExportHelper):
     bl_idname = "edl.vegas_export"
     bl_label = "Export Vegas EDL (.txt)"
 
-    filepath = bpy.props.StringProperty()
+    filepath: bpy.props.StringProperty()
     filename_ext = ".txt"
-    filter_glob = bpy.props.StringProperty(default="*.txt", options={'HIDDEN'})
+    filter_glob: bpy.props.StringProperty(default="*.txt", options={'HIDDEN'})
     check_extension = True
 
-    only_current_timeline = bpy.props.BoolProperty(
+    only_current_timeline: bpy.props.BoolProperty(
         name='Export Only Current Timeline',
         description='Ignore sequences outside of the current set timeline.',
         default=False)
-    export_meta_subsequences = bpy.props.BoolProperty(
+    export_meta_subsequences: bpy.props.BoolProperty(
         name='Export From Inside MetaStrips',
         description='Drill into and export all files from inside meta strips as well as the current timeline.',
         default=False)
-    videos = bpy.props.EnumProperty(
+    videos: bpy.props.EnumProperty(
         name="Videos",
         items=(('NONE', 'Only Export Audio', ""), ("SELECTED", "Export Selected Videos", ""), ("ALL", "Export All Videos", "")),
         default='NONE')
@@ -407,20 +407,20 @@ class SamplitudeEDLExport(bpy.types.Operator, ExportHelper):
     bl_idname = "edl.samplitude_export"
     bl_label = "Export Samplitude EDL (.edl)"
 
-    filepath = bpy.props.StringProperty()
+    filepath: bpy.props.StringProperty()
     filename_ext = ".edl"
-    filter_glob = bpy.props.StringProperty(default="*.edl", options={'HIDDEN'})
+    filter_glob: bpy.props.StringProperty(default="*.edl", options={'HIDDEN'})
     check_extension = True
 
-    only_current_timeline = bpy.props.BoolProperty(
+    only_current_timeline: bpy.props.BoolProperty(
         name='Export Only Current Timeline',
         description='Ignore sequences outside of the current set timeline.',
         default=False)
-    export_meta_subsequences = bpy.props.BoolProperty(
+    export_meta_subsequences: bpy.props.BoolProperty(
         name='Export From Inside MetaStrips',
         description='Drill into and export all files from inside meta strips as well as the current timeline.',
         default=False)
-    videos = bpy.props.EnumProperty(
+    videos: bpy.props.EnumProperty(
         name="Videos",
         items=(('NONE', 'Only Export Audio', ""), ("SELECTED", "Export Selected Videos", ""), ("ALL", "Export All Videos", "")),
         default='NONE')
@@ -447,13 +447,13 @@ def edl_export_menu(self, context):
 def register():
     bpy.utils.register_class(SamplitudeEDLExport)
     bpy.utils.register_class(VegasEDLExport)
-    bpy.types.INFO_MT_file_export.append(edl_export_menu)
+    bpy.types.TOPBAR_MT_file_export.append(edl_export_menu)
 
 
 def unregister():
     bpy.utils.unregister_class(SamplitudeEDLExport)
     bpy.utils.unregister_class(VegasEDLExport)
-    bpy.types.INFO_MT_file_export.remove(edl_export_menu)
+    bpy.types.TOPBAR_MT_file_export.remove(edl_export_menu)
 
 
 if __name__ == "__main__":
