@@ -25,7 +25,7 @@ bl_info = {
     "name": "Quick EDL Exporter",
     "description": "Exports audio (and video) in the VSE timeline to EDL format to be used in Reaper, Samplitude and others.",
     "author": "Hudson Barkley (Snu/snuq/Aritodo)",
-    "version": (0, 8, 1),
+    "version": (0, 8, 2),
     "blender": (2, 80, 0),
     "location": "File > Export > Samplitude EDL (.edl); Vegas EDL (.txt)",
     "wiki_url": "",
